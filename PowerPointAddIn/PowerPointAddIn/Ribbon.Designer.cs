@@ -10,7 +10,7 @@ namespace PowerPointAddIn
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private Application _pptApp;
-        private SlideService _myClass;
+        private SlideService _slideClass;
 
         public Ribbon()
             : base(Globals.Factory.GetRibbonFactory())
@@ -18,7 +18,7 @@ namespace PowerPointAddIn
             InitializeComponent();
             //
             var container = ContainerConfig.RegisterServices();
-            _myClass = container.Resolve<SlideService>();
+            _slideClass = container.Resolve<SlideService>();
         }
 
         /// <summary> 
@@ -154,31 +154,37 @@ namespace PowerPointAddIn
             // 
             this.copyPosition.Label = "CopyPosition";
             this.copyPosition.Name = "copyPosition";
+            this.copyPosition.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.copyPosition_Click);
             // 
             // pastePosition
             // 
             this.pastePosition.Label = "PastePosition";
             this.pastePosition.Name = "pastePosition";
+            this.pastePosition.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.pastePosition_Click);
             // 
             // alignLeft
             // 
             this.alignLeft.Label = "Align Left";
             this.alignLeft.Name = "alignLeft";
+            this.alignLeft.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.alignLeft_Click);
             // 
             // alignTop
             // 
             this.alignTop.Label = "Align Top";
             this.alignTop.Name = "alignTop";
+            this.alignTop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.alignTop_Click);
             // 
             // alignRight
             // 
             this.alignRight.Label = "Align Right";
             this.alignRight.Name = "alignRight";
+            this.alignRight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.alignRight_Click);
             // 
             // alignBottom
             // 
             this.alignBottom.Label = "Align Bottom";
             this.alignBottom.Name = "alignBottom";
+            this.alignBottom.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.alignBottom_Click);
             // 
             // Ribbon
             // 
