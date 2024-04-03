@@ -1,6 +1,5 @@
-﻿using Microsoft.Office.Core;
-using Microsoft.Office.Interop.PowerPoint;
-using System;
+﻿using Microsoft.Office.Interop.PowerPoint;
+using PowerPointAddIn.Service;
 using System.Windows.Forms;
 using Application = Microsoft.Office.Interop.PowerPoint.Application;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
@@ -8,11 +7,11 @@ namespace PowerPointAddIn
 {
     public class SlideService : ISlideService
     {
-        private float? storedPositionX;
-        private float? storedPositionY;
+        private float? shapePositionX;
+        private float? shapePositionY;
         private Shape  _selectedShape;
-        //
 
+        #region slide
         public void AddSlide(Application pptApp)
         {
             Slide currentSlide = pptApp.ActiveWindow.View.Slide;
@@ -36,8 +35,9 @@ namespace PowerPointAddIn
             }
         }
 
-        //
+        #endregion
 
+        #region font size
         public void FontSizePlus(Application pptApp)
         {
             TextRange selectedTextRange = GetSelectedText(pptApp);
@@ -57,19 +57,10 @@ namespace PowerPointAddIn
                 selectedTextRange.Font.Size -= 1;
             }
         }
+       
+        #endregion
 
-        private TextRange GetSelectedText(Application pptApp)
-        {
-            TextRange textRange = null;
-
-            if (pptApp.ActiveWindow.Selection.Type == PpSelectionType.ppSelectionText)
-            {
-                textRange = pptApp.ActiveWindow.Selection.TextRange;
-            }
-
-            return textRange;
-        }
-
+        #region text 
 
         public void CopyText(Application pptApp)
         {
@@ -91,66 +82,99 @@ namespace PowerPointAddIn
             }
         }
 
-        //
+        private TextRange GetSelectedText(Application pptApp)
+        {
+            TextRange textRange = null;
+
+            if (pptApp.ActiveWindow.Selection.Type == PpSelectionType.ppSelectionText)
+            {
+                textRange = pptApp.ActiveWindow.Selection.TextRange;
+            }
+
+            return textRange;
+        }
+        #endregion
+
+        #region copy position
 
         public void CopyPosition(Application pptApp)
         {
-            _selectedShape = GetSelectedShape();
+            _selectedShape = GetSelectedShape(pptApp);
+
             if (_selectedShape != null)
             {
-                storedPositionX = _selectedShape.Left;
-                storedPositionY = _selectedShape.Top;
+                shapePositionX = _selectedShape.Left;
+                shapePositionY = _selectedShape.Top;
             }
         }
 
         public void PastePosition(Application pptApp)
         {
-            if (_selectedShape != null && storedPositionX.HasValue && storedPositionY.HasValue)
+            if (_selectedShape != null && shapePositionX.HasValue && shapePositionY.HasValue)
             {
-                _selectedShape.Left = storedPositionX.Value;
-                _selectedShape.Top = storedPositionY.Value;
+                _selectedShape.Left = shapePositionX.Value;
+                _selectedShape.Top = shapePositionY.Value;
             }
         }
+        private Shape GetSelectedShape(Application pptApp)
+        {
+            Selection allShapes = pptApp.ActiveWindow.Selection;
+            Shape selectedshape = allShapes.ShapeRange[1];
+            return selectedshape;
+        }
 
-        //
+        #endregion
+
+        #region align
 
         public void AlignLeft(Application pptApp)
         {
-            //AlignShapes(HorizontalAlignment.Left,pptApp);
+           AlignShapes(pptApp, Alignment.Left);
         }
 
         public void AlignRight(Application pptApp)
         {
-            throw new NotImplementedException();
+            AlignShapes(pptApp, Alignment.Right);
         }
 
         public void AlignTop(Application pptApp)
         {
-            throw new NotImplementedException();
+            AlignShapes(pptApp, Alignment.Top);
         }
 
         public void AlignBottom(Application pptApp)
         {
-            throw new NotImplementedException();
+            AlignShapes(pptApp, Alignment.Bottom);
         }
 
-        private void AlignShapes(MsoAlignCmd alignCmd, Application pptApp)
+        private void AlignShapes(Application pptApp, Alignment align)
         {
-            var selection = pptApp.ActiveWindow.Selection;
-            if (selection.Type == PpSelectionType.ppSelectionShapes && selection.ShapeRange.Count >= 2)
+            Selection allShapes = pptApp.ActiveWindow.Selection;
+            float sWidth = pptApp.ActivePresentation.PageSetup.SlideWidth;
+            float sHeight = pptApp.ActivePresentation.PageSetup.SlideHeight;
+
+            foreach (Shape shape in allShapes.ShapeRange)
             {
-                selection.ShapeRange.Align(alignCmd, MsoTriState.msoFalse);
+                switch (align)
+                {
+                    case Alignment.Left:
+                        shape.Left = 0;
+                        break;
+                    case Alignment.Right:
+                        shape.Left = sWidth - shape.Width;
+                        break;
+                    case Alignment.Top:
+                        shape.Top = 0;
+                        break;
+                    case Alignment.Bottom:
+                        shape.Top = sHeight - shape.Height;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
-        private Shape GetSelectedShape()
-        {
-            Selection selection = Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            if (selection.Type == PpSelectionType.ppSelectionShapes && selection.ShapeRange.Count == 1)
-            {
-                return selection.ShapeRange[1];
-            }
-            return null;
-        }
+        #endregion
     }
 }

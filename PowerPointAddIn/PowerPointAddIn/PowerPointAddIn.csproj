@@ -163,8 +163,8 @@
   -->
   <ItemGroup>
     <Compile Include="ContainerConfig.cs" />
+    <Compile Include="Service\Alignment.cs" />
     <Compile Include="Service\ISlideService.cs" />
-    <Compile Include="SlideClass.cs" />
     <Compile Include="Service\SlideService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
