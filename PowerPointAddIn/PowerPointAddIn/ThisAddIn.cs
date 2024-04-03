@@ -1,6 +1,4 @@
-﻿using System;
-using Unity;
-namespace PowerPointAddIn
+﻿namespace PowerPointAddIn
 {
     public partial class ThisAddIn
     {

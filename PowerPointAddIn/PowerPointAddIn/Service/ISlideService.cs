@@ -24,5 +24,8 @@ namespace PowerPointAddIn
         void AlignRight(Application pptApp);
         void AlignTop(Application pptApp);
         void AlignBottom(Application pptApp);
+
+        // status
+        void checkShapesStatus(Application pptApp, Selection Sel);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Office.Tools.Ribbon;
+﻿using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.Office.Tools.Ribbon;
+using System.Windows.Forms;
 
 namespace PowerPointAddIn
 {
@@ -8,7 +10,15 @@ namespace PowerPointAddIn
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
             _pptApp = Globals.ThisAddIn.Application;
+            // event selection
+            _pptApp.WindowSelectionChange += SelectionChangeEvent;
         }
+
+        private void SelectionChangeEvent(Selection Sel)
+        {
+            _slideClass.checkShapesStatus(_pptApp, Sel);
+        }
+
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
@@ -72,5 +82,6 @@ namespace PowerPointAddIn
         }
 
         //
+
     }
 }

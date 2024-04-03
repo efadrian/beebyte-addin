@@ -48,12 +48,12 @@ namespace PowerPointAddIn
             this.group2 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
-            this.group3 = this.Factory.CreateRibbonGroup();
+            this.groupText = this.Factory.CreateRibbonGroup();
             this.fSizePlus = this.Factory.CreateRibbonButton();
             this.fSizeMinus = this.Factory.CreateRibbonButton();
             this.copyTxt = this.Factory.CreateRibbonButton();
             this.pasteTxt = this.Factory.CreateRibbonButton();
-            this.group4 = this.Factory.CreateRibbonGroup();
+            this.groupShape = this.Factory.CreateRibbonGroup();
             this.copyPosition = this.Factory.CreateRibbonButton();
             this.pastePosition = this.Factory.CreateRibbonButton();
             this.alignLeft = this.Factory.CreateRibbonButton();
@@ -63,8 +63,8 @@ namespace PowerPointAddIn
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group2.SuspendLayout();
-            this.group3.SuspendLayout();
-            this.group4.SuspendLayout();
+            this.groupText.SuspendLayout();
+            this.groupShape.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -82,8 +82,8 @@ namespace PowerPointAddIn
             // tab2
             // 
             this.tab2.Groups.Add(this.group2);
-            this.tab2.Groups.Add(this.group3);
-            this.tab2.Groups.Add(this.group4);
+            this.tab2.Groups.Add(this.groupText);
+            this.tab2.Groups.Add(this.groupShape);
             this.tab2.Label = "BeeByte";
             this.tab2.Name = "tab2";
             // 
@@ -106,14 +106,14 @@ namespace PowerPointAddIn
             this.button2.Name = "button2";
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
             // 
-            // group3
+            // groupText
             // 
-            this.group3.Items.Add(this.fSizePlus);
-            this.group3.Items.Add(this.fSizeMinus);
-            this.group3.Items.Add(this.copyTxt);
-            this.group3.Items.Add(this.pasteTxt);
-            this.group3.Label = "Text ";
-            this.group3.Name = "group3";
+            this.groupText.Items.Add(this.fSizePlus);
+            this.groupText.Items.Add(this.fSizeMinus);
+            this.groupText.Items.Add(this.copyTxt);
+            this.groupText.Items.Add(this.pasteTxt);
+            this.groupText.Label = "Text ";
+            this.groupText.Name = "groupText";
             // 
             // fSizePlus
             // 
@@ -139,16 +139,16 @@ namespace PowerPointAddIn
             this.pasteTxt.Name = "pasteTxt";
             this.pasteTxt.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.pasteTxt_Click);
             // 
-            // group4
+            // groupShape
             // 
-            this.group4.Items.Add(this.copyPosition);
-            this.group4.Items.Add(this.pastePosition);
-            this.group4.Items.Add(this.alignLeft);
-            this.group4.Items.Add(this.alignTop);
-            this.group4.Items.Add(this.alignRight);
-            this.group4.Items.Add(this.alignBottom);
-            this.group4.Label = "Shape";
-            this.group4.Name = "group4";
+            this.groupShape.Items.Add(this.copyPosition);
+            this.groupShape.Items.Add(this.pastePosition);
+            this.groupShape.Items.Add(this.alignLeft);
+            this.groupShape.Items.Add(this.alignTop);
+            this.groupShape.Items.Add(this.alignRight);
+            this.groupShape.Items.Add(this.alignBottom);
+            this.groupShape.Label = "Shape";
+            this.groupShape.Name = "groupShape";
             // 
             // copyPosition
             // 
@@ -199,10 +199,10 @@ namespace PowerPointAddIn
             this.tab2.PerformLayout();
             this.group2.ResumeLayout(false);
             this.group2.PerformLayout();
-            this.group3.ResumeLayout(false);
-            this.group3.PerformLayout();
-            this.group4.ResumeLayout(false);
-            this.group4.PerformLayout();
+            this.groupText.ResumeLayout(false);
+            this.groupText.PerformLayout();
+            this.groupShape.ResumeLayout(false);
+            this.groupShape.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -215,12 +215,12 @@ namespace PowerPointAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupText;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton fSizePlus;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton fSizeMinus;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton copyTxt;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton pasteTxt;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupShape;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton copyPosition;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton pastePosition;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton alignLeft;

@@ -1,4 +1,6 @@
-﻿using Microsoft.Office.Interop.PowerPoint;
+﻿using Microsoft.Office.Core;
+using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.Office.Tools.Ribbon;
 using PowerPointAddIn.Service;
 using System.Windows.Forms;
 using Application = Microsoft.Office.Interop.PowerPoint.Application;
@@ -9,7 +11,7 @@ namespace PowerPointAddIn
     {
         private float? shapePositionX;
         private float? shapePositionY;
-        private Shape  _selectedShape;
+        private Shape _selectedShape;
 
         #region slide
         public void AddSlide(Application pptApp)
@@ -57,7 +59,7 @@ namespace PowerPointAddIn
                 selectedTextRange.Font.Size -= 1;
             }
         }
-       
+
         #endregion
 
         #region text 
@@ -68,7 +70,7 @@ namespace PowerPointAddIn
 
             if (selectedTextRange != null)
             {
-               Clipboard.SetText(selectedTextRange.Text);
+                Clipboard.SetText(selectedTextRange.Text);
             }
         }
 
@@ -129,7 +131,7 @@ namespace PowerPointAddIn
 
         public void AlignLeft(Application pptApp)
         {
-           AlignShapes(pptApp, Alignment.Left);
+            AlignShapes(pptApp, Alignment.Left);
         }
 
         public void AlignRight(Application pptApp)
@@ -175,6 +177,45 @@ namespace PowerPointAddIn
             }
         }
 
-        #endregion
+        public void checkShapesStatus(Application pptApp, Selection Sel)
+        {
+            var ribbon = Globals.Ribbons.GetRibbon<Ribbon>();
+            // Text
+            RibbonGroup groupText = ribbon.groupText;
+
+            if (Sel.Type == PpSelectionType.ppSelectionText)
+            {
+                ToigleGroup(groupText, true);
+            }
+            else
+            {
+                ToigleGroup(groupText, false);
+            }
+            // shape
+            RibbonGroup groupShape = ribbon.groupShape;
+
+            if (Sel.Type == PpSelectionType.ppSelectionShapes)
+            {
+                ToigleGroup(groupShape, true);
+            }
+            else
+            {
+                ToigleGroup(groupShape, false);
+            }
+        }
+
+        public void ToigleGroup(RibbonGroup group, bool flag)
+        {
+            if (group != null)
+            {
+                foreach (var control in group.Items)
+                {
+                    control.Enabled = flag;
+                }
+            }
+        }
     }
+
+
+    #endregion
 }
