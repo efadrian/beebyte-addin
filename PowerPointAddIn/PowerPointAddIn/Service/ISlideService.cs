@@ -8,5 +8,13 @@ namespace PowerPointAddIn
 
         void RemoveSlide(Application pptApp);
 
+        //
+        void FontSizePlus(Application pptApp);
+
+        void FontSizeMinus(Application pptApp);
+
+        void CopyText(Application pptApp);
+
+        void PasteText(Application pptApp);
     }
 }

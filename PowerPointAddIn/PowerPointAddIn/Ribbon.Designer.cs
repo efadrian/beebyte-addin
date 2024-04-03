@@ -119,21 +119,25 @@ namespace PowerPointAddIn
             // 
             this.fSizePlus.Label = "Font Size +";
             this.fSizePlus.Name = "fSizePlus";
+            this.fSizePlus.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.fSizePlus_Click);
             // 
             // fSizeMinus
             // 
             this.fSizeMinus.Label = "Font Size -";
             this.fSizeMinus.Name = "fSizeMinus";
+            this.fSizeMinus.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.fSizeMinus_Click);
             // 
             // copyTxt
             // 
             this.copyTxt.Label = "Copy Text";
             this.copyTxt.Name = "copyTxt";
+            this.copyTxt.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.copyTxt_Click);
             // 
             // pasteTxt
             // 
             this.pasteTxt.Label = "Paste Text";
             this.pasteTxt.Name = "pasteTxt";
+            this.pasteTxt.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.pasteTxt_Click);
             // 
             // group4
             // 

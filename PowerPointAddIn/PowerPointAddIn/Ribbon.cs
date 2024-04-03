@@ -19,5 +19,25 @@ namespace PowerPointAddIn
         {
             _myClass.RemoveSlide(_pptApp);
         }
+
+        private void fSizePlus_Click(object sender, RibbonControlEventArgs e)
+        {
+            _myClass.FontSizePlus(_pptApp);
+        }
+
+        private void fSizeMinus_Click(object sender, RibbonControlEventArgs e)
+        {
+            _myClass.FontSizeMinus(_pptApp);
+        }
+
+        private void copyTxt_Click(object sender, RibbonControlEventArgs e)
+        {
+            _myClass.CopyText(_pptApp);
+        }
+
+        private void pasteTxt_Click(object sender, RibbonControlEventArgs e)
+        {
+            _myClass.PasteText(_pptApp);
+        }
     }
 }
