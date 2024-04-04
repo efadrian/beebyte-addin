@@ -1,6 +1,5 @@
 #### Microsoft PowerPoint C# VSTO addin project that adds a custom tab with methods
 ---
-##### Features
 - add / remove slide
 - increase / decrease font size
 - copy / paste text selected
